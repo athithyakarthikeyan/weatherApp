@@ -1,23 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import axios from "axios";
+import { Button, Input } from "antd";
+import "./App.css";
 
 function App() {
+  const API_KEY = 'f50c3f2125830d5edd9c58a0955fa928';
+  const [search, setSearch] = useState("");
+  const [weatherData, setWeatherData] = useState(null);
+
+  const getWeatherData = async () => {
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${search}&appid=${API_KEY}`;
+    try {
+      const response = await axios.get(url);
+      setWeatherData(response.data);
+    } catch (error) {
+      console.error('Error fetching data: ', error);
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <h1 className="title">Weather App</h1>
+      <div className="search">
+        <div className="search-bar"><Input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search here" /></div>
+        <Button onClick={getWeatherData}>Search</Button>
+      </div>
+      {weatherData && (
+        <div>
+          <p>{weatherData.name}</p>
+          <p>{weatherData.weather[0].description}</p>
+          <p>{((weatherData.main.temp - 273.15)).toFixed(2)}°C</p>
+        </div>
+      )}
     </div>
   );
 }

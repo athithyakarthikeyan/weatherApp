@@ -1,9 +1,9 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #F3F7EC;
+  background-color: #000000;
 }
 
 code {
@@ -11,10 +11,5 @@ code {
     monospace;
 }
 
-.title{
-  margin-left: 15px;
-}
 
-.search-bar{
-  padding :5px 10px;
-}
+

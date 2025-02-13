@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import './App.css'
 import axios from 'axios'
 
@@ -6,7 +6,6 @@ function App() {
   const [weather, setWeather] =  useState(0);
   const [city, setCity] = useState("");
   const [place, setPlace] = useState("");
-  const [show, setShow] = useState(false);
   const API_KEY = "f50c3f2125830d5edd9c58a0955fa928";
   
 
@@ -23,15 +22,13 @@ function App() {
   )
   }
 
-  useEffect(()=>{
-    if (weather!=0) setShow(true);
-  },[weather])
+  
 
   return(
     <div>
       <input placeholder='Enter your city' onChange={detectInput}></input>
       <button onClick={fetchWeather}>Find the weather!</button>
-      {show && <h1>The weather at {place} right now is {weather}°C.</h1>}
+      {weather!=0 && <h1>The weather at {place} right now is {weather}°C.</h1>}
     </div>
   )
 }
